@@ -1,0 +1,74 @@
+"use client";
+import React, { useRef } from "react";
+import { useGLTF } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+
+const Wizard = React.memo(function Wizard(props) {
+  // Use React.memo for performance optimization
+
+    const camera = THREE.PerspectiveCamera(-0.812, window.innerWidth / window.innerHeight,0.1, 1000 );
+
+
+
+  const { nodes, materials } = useGLTF('models/28.glb')
+
+  const modelRef = useRef();
+
+  useFrame((state) => {
+    modelRef.current.rotation.y =
+      -0.1 + Math.sin(state.clock.elapsedTime) * 0.25;
+  });
+
+
+  return (
+      <group ref={modelRef}>
+    <group {...props} dispose={null}>
+      <group rotation={[Math.PI / 2, 0, 0]}>
+        <group scale={54.411}>
+          <group rotation={[-Math.PI / 2, 0, 0]}>
+            <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+              <group rotation={[Math.PI, 0, 0]} scale={110.41}>
+                <mesh geometry={nodes.Bench_BenchConcreteBase_0.geometry} material={materials.BenchConcreteBase} />
+                <mesh geometry={nodes.Bench_BenchWood_0.geometry} material={materials.BenchWood} />
+              </group>
+              <group rotation={[-Math.PI / 2, 0, 0]} scale={[50, 22.5, 50]}>
+                <mesh geometry={nodes.CeillingWire_CeillingWire_0.geometry} material={materials.CeillingWire} />
+                <mesh geometry={nodes.CeillingWire_CeillingWire_0001.geometry} material={materials.CeillingWire} />
+                <mesh geometry={nodes.CeillingWire_CeillingWire_0002.geometry} material={materials.CeillingWire} />
+                <mesh geometry={nodes.CeillingWire_CeillingWire_0003.geometry} material={materials.CeillingWire} />
+                <mesh geometry={nodes.CeillingWire_CeillingWire_0004.geometry} material={materials.CeillingWire} />
+                <mesh geometry={nodes.CeillingWire_CeillingWire_0005.geometry} material={materials.CeillingWire} />
+                <mesh geometry={nodes.CeillingWire_CeillingWire_0006.geometry} material={materials.CeillingWire} />
+              </group>
+              <group rotation={[-Math.PI / 2, 0, 0]} scale={100}>
+                <mesh geometry={nodes.Lamp_Emissive_0.geometry} material={materials.Emissive} />
+                <mesh geometry={nodes.Lamp_Lamp_0.geometry} material={materials.Lamp} />
+              </group>
+              <group rotation={[-Math.PI / 2, 0, 0]} scale={[50, 22.5, 50]}>
+                <mesh geometry={nodes.LampBase_CeillingWire_0.geometry} material={materials.CeillingWire} />
+                <mesh geometry={nodes.LampBase_Emissive_0.geometry} material={materials.Emissive} />
+              </group>
+              <mesh geometry={nodes.PaitingsInside_001_Painting_0.geometry} material={materials.Painting} rotation={[-Math.PI / 2, 0.099, 0]} scale={100} />
+              <mesh geometry={nodes.PaitingsOutside_Painting_0.geometry} material={materials.Painting} rotation={[-Math.PI / 2, 0.099, 0]} scale={100} />
+              <group rotation={[-Math.PI / 2, 0, 0]} scale={[50, 22.5, 50]}>
+                <mesh geometry={nodes.Walls_Ceilling_0.geometry} material={materials.Ceilling} />
+                <mesh geometry={nodes.Walls_Emissive_0.geometry} material={materials.Emissive} />
+                <mesh geometry={nodes.Walls_Floor_0.geometry} material={materials.Floor} />
+                <mesh geometry={nodes.Walls_Walls_0.geometry} material={materials.Walls} />
+              </group>
+            </group>
+          </group>
+       </group>
+      </group>
+      <pointLight intensity={54351.413} decay={2} position={[4.076, 5.904, -1.005]} rotation={[-1.839, 0.602, 1.932]} />
+      <PerspectiveCamera makeDefault={false} far={100} near={0.1} fov={22.895} position={[-0.812, 503.926, 250.958]} rotation={[-0.627, 0.71, 0.441]} />
+      <mesh geometry={nodes['tripo_node_d5d7a45d-0f3d-443e-a721-a52008c88198'].geometry} material={materials['tripo_mat_d5d7a45d-0f3d-443e-a721-a52008c88198']} position={[-243.812, 123.317, 22.795]} rotation={[-0.005, -0.036, 0]} scale={[169.511, 285.253, 259.532]} />
+    
+    </group>
+</group>
+  )
+})
+  ;
+
+export default Wizard;
+useGLTF.preload("/models/28.glb");
